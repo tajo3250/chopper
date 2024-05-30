@@ -9,7 +9,6 @@ outputTopCanvas.height = 1024;
 outputBottomCanvas.width = 1024;
 outputBottomCanvas.height = 1024;
 
-// Enable dropping anywhere on screen
 window.addEventListener('dragover', (event) => {
   event.preventDefault();
 });
@@ -29,8 +28,8 @@ window.addEventListener('drop', (event) => {
 
       const ctxTop = outputTopCanvas.getContext('2d');
       const ctxBottom = outputBottomCanvas.getContext('2d');
-      ctxTop.drawImage(img, 0, 0, 1024, 512); // Top half
-      ctxBottom.drawImage(img, 0, 1024, 1024, 512); // Bottom half
+      ctxTop.drawImage(img, 0, 0, 1024, 1024); // Top half
+      ctxBottom.drawImage(img, 0, 1024, 1024, 1024); // Bottom half
     };
     img.src = event.target.result;
   };
@@ -57,8 +56,8 @@ imageInput.addEventListener('change', (event) => {
 
       const ctxTop = outputTopCanvas.getContext('2d');
       const ctxBottom = outputBottomCanvas.getContext('2d');
-      ctxTop.drawImage(img, 0, 0, 1024, 512); // Top half
-      ctxBottom.drawImage(img, 0, 1024, 1024, 512); // Bottom half
+      ctxTop.drawImage(img, 0, 0, 1024, 1024); // Top half
+      ctxBottom.drawImage(img, 0, 1024, 1024, 1024); // Bottom half
     };
     img.src = event.target.result;
   };
