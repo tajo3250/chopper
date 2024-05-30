@@ -1,4 +1,4 @@
-// Not Tested Throughly, Based was made by Gemini. Should work.
+// Not tested throughly, base made by Gemini.
 
 const dropZone = document.getElementById('drop-zone');
 const imageInput = document.getElementById('image-input');
@@ -10,6 +10,8 @@ outputTopCanvas.height = 1024;
 
 outputBottomCanvas.width = 1024;
 outputBottomCanvas.height = 1024;
+
+let imageIndex = 1;
 
 window.addEventListener('dragover', (event) => {
   event.preventDefault();
@@ -23,10 +25,8 @@ window.addEventListener('drop', (event) => {
   reader.onload = function(event) {
     const img = new Image();
     img.onload = function() {
-      const ctxTop = outputTopCanvas.getContext('2d');
-      const ctxBottom = outputBottomCanvas.getContext('2d');
-      ctxTop.drawImage(img, 0, 0, img.width, img.height/2, 0, 0, img.height/2, img.width);
-      ctxBottom.drawImage(img, 0, img.height/2, img.width, img.height/2, 0, 0, img.width, img.height/2);
+      drawImageAndDownload(img, imageIndex);
+      imageIndex++;
     };
     img.src = event.target.result;
   };
@@ -45,13 +45,27 @@ imageInput.addEventListener('change', (event) => {
   reader.onload = function(event) {
     const img = new Image();
     img.onload = function() {
-      const ctxTop = outputTopCanvas.getContext('2d');
-      const ctxBottom = outputBottomCanvas.getContext('2d');
-      ctxTop.drawImage(img, 0, 0, img.width, img.height/2, 0, 0, img.height/2, img.width);
-      ctxBottom.drawImage(img, 0, img.height/2, img.width, img.height/2, 0, 0, img.width, img.height/2);
+      drawImageAndDownload(img, imageIndex);
+      imageIndex++;
     };
     img.src = event.target.result;
   };
 
   reader.readAsDataURL(file);
 });
+
+function drawImageAndDownload(img, imageIndex) {
+  const ctxTop = outputTopCanvas.getContext('2d');
+  const ctxBottom = outputBottomCanvas.getContext('2d');
+  ctxTop.drawImage(img, 0, 0, img.width, img.height/2, 0, 0, img.height/2, img.width);
+  ctxBottom.drawImage(img, 0, img.height/2, img.width, img.height/2, 0, 0, img.width, img.height/2);
+  downloadImage(outputTopCanvas, `${imageIndex}upper`);
+  downloadImage(outputBottomCanvas, `${imageIndex}lower`);
+}
+
+function downloadImage(canvas, filename) {
+  const link = document.createElement('a');
+  link.href = canvas.toDataURL();
+  link.download = filename + '.png';
+  link.click();
+}
