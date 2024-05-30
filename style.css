@@ -1,0 +1,28 @@
+html {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+#drop-zone {
+  margin-bottom: 10px;
+}
+
+input[type="file"] {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+#image-input {
+  display: none;
+}
+
+canvas {
+  display: block;
+  margin: 20px auto;
+  border: 1px solid #ddd;
+}
