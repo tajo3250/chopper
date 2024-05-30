@@ -1,20 +1,20 @@
 const dropZone = document.getElementById('drop-zone');
 const imageInput = document.getElementById('image-input');
-const outputCanvas = document.getElementById('output-canvas');
+const outputTopCanvas = document.getElementById('output-top');
+const outputBottomCanvas = document.getElementById('output-bottom');
 
-outputCanvas.width = 1024;
-outputCanvas.height = 1024;
+outputTopCanvas.width = 1024;
+outputTopCanvas.height = 1024;
 
-dropZone.addEventListener('dragover', (event) => {
+outputBottomCanvas.width = 1024;
+outputBottomCanvas.height = 1024;
+
+// Enable dropping anywhere on screen
+window.addEventListener('dragover', (event) => {
   event.preventDefault();
-  dropZone.style.backgroundColor = '#eee';
 });
 
-dropZone.addEventListener('dragleave', () => {
-  dropZone.style.backgroundColor = null;
-});
-
-dropZone.addEventListener('drop', (event) => {
+window.addEventListener('drop', (event) => {
   event.preventDefault();
   const file = event.dataTransfer.files[0];
   const reader = new FileReader();
@@ -27,15 +27,20 @@ dropZone.addEventListener('drop', (event) => {
         return;
       }
 
-      const ctx = outputCanvas.getContext('2d');
-      ctx.drawImage(img, 0, 0, 1024, 1024); // Top half
-      ctx.drawImage(img, 0, 1024, 1024, 1024); // Bottom half
+      const ctxTop = outputTopCanvas.getContext('2d');
+      const ctxBottom = outputBottomCanvas.getContext('2d');
+      ctxTop.drawImage(img, 0, 0, 1024, 512); // Top half
+      ctxBottom.drawImage(img, 0, 1024, 1024, 512); // Bottom half
     };
     img.src = event.target.result;
   };
 
   reader.readAsDataURL(file);
-  dropZone.style.backgroundColor = null;
+});
+
+// Allow clicking the drop zone to open file selection
+dropZone.addEventListener('click', () => {
+  imageInput.click();
 });
 
 imageInput.addEventListener('change', (event) => {
@@ -50,9 +55,10 @@ imageInput.addEventListener('change', (event) => {
         return;
       }
 
-      const ctx = outputCanvas.getContext('2d');
-      ctx.drawImage(img, 0, 0, 1024, 1024); // Top half
-      ctx.drawImage(img, 0, 1024, 1024, 1024); // Bottom half
+      const ctxTop = outputTopCanvas.getContext('2d');
+      const ctxBottom = outputBottomCanvas.getContext('2d');
+      ctxTop.drawImage(img, 0, 0, 1024, 512); // Top half
+      ctxBottom.drawImage(img, 0, 1024, 1024, 512); // Bottom half
     };
     img.src = event.target.result;
   };
