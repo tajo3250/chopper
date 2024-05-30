@@ -7,12 +7,19 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Image Chopper</h1>
-    <div id="drop-zone">
-        <p>Drop your image here (1024x2048 only)</p>
-        <input type="file" id="image-input" accept="image/*">
+    <div id="container">
+        <div id="left-section">
+            <h1>Image Chopper</h1>
+            <div id="drop-zone">
+                <p>Drop your image here (1024x2048 only)</p>
+                <input type="file" id="image-input" accept="image/*">
+            </div>
+        </div>
+        <div id="right-section">
+            <canvas id="output-top"></canvas>
+            <canvas id="output-bottom"></canvas>
+        </div>
     </div>
-    <canvas id="output-canvas"></canvas>
     <script src="script.js"></script>
 </body>
 </html>
