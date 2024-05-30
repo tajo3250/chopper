@@ -1,3 +1,5 @@
+// Not Tested Throughly, Based was made by Gemini. Should work.
+
 const dropZone = document.getElementById('drop-zone');
 const imageInput = document.getElementById('image-input');
 const outputTopCanvas = document.getElementById('output-top');
