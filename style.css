@@ -60,5 +60,5 @@ canvas {
 }
 
 #output-top, #output-bottom {
-  height: calc(50% - 10px);
+  height: calc(50%);
 }
