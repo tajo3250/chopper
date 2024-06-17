@@ -59,8 +59,8 @@ function drawImageAndDownload(img, imageIndex) {
   const ctxBottom = outputBottomCanvas.getContext('2d');
   ctxTop.drawImage(img, 0, 0, img.width, img.height/2, 0, 0, img.height/2, img.width);
   ctxBottom.drawImage(img, 0, img.height/2, img.width, img.height/2, 0, 0, img.width, img.height/2);
-  downloadImage(outputTopCanvas, `${imageIndex}upper`);
-  downloadImage(outputBottomCanvas, `${imageIndex}lower`);
+  downloadImage(outputTopCanvas, `square${imageIndex}upper`);
+  downloadImage(outputBottomCanvas, `square${imageIndex}lower`);
 }
 
 function downloadImage(canvas, filename) {
